@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>naseef</title>
     <link rel="icon" type="image/png" href="favicon.png" sizes="45x45">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet">
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -86,12 +91,12 @@
                         "label-sm": ["JetBrains Mono"]
                     },
                     "fontSize": {
-                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                        "code-block": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
-                        "tab-title": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
-                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "code-block": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "tab-title": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }]
                     }
                 },
             },
@@ -104,18 +109,33 @@
             overflow: hidden;
             height: 100vh;
         }
+
         .material-symbols-outlined {
             font-size: 18px;
             user-select: none;
         }
+
         .notebook-cell-active {
             border-left: 2px solid #007acc !important;
         }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .vscode-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
-        .cell-hover-actions { opacity: 0; transition: opacity 0.1s; }
-        .notebook-cell:hover .cell-hover-actions { opacity: 1; }
-        
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .vscode-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .cell-hover-actions {
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+
+        .notebook-cell:hover .cell-hover-actions {
+            opacity: 1;
+        }
+
         .activity-item-active {
             border-left: 2px solid #9fcaff;
             background-color: #353535;
@@ -126,15 +146,30 @@
             background-color: #131313 !important;
             border-top: 2px solid #9fcaff !important;
         }
+
         .tab-active .text-on-surface-variant {
             color: #e5e2e1 !important;
         }
 
         @keyframes nudge-ai {
-            0%, 80%, 100% { transform: scale(1) rotate(0deg); }
-            85% { transform: scale(1.05) rotate(2deg); }
-            90% { transform: scale(1.05) rotate(-2deg); }
-            95% { transform: scale(1.05) rotate(1deg); }
+
+            0%,
+            80%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            85% {
+                transform: scale(1.05) rotate(2deg);
+            }
+
+            90% {
+                transform: scale(1.05) rotate(-2deg);
+            }
+
+            95% {
+                transform: scale(1.05) rotate(1deg);
+            }
         }
 
         .animate-ai-nudge {
@@ -146,895 +181,1194 @@
                 animation: none;
             }
         }
-        
+
         html {
             scroll-behavior: smooth;
         }
     </style>
 </head>
+
 <body class="font-body-md text-body-md select-none md:select-text">
 
-<!-- Top AppBar -->
-<header class="flex items-center justify-between px-padding-md w-full bg-background border-b border-outline-variant fixed top-0 z-50 h-11">
-    <div class="flex items-center space-x-2">
-        <!-- Mobile Sidebar Toggle -->
-        <button id="btn-toggle-sidebar" class="md:hidden text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-variant/50 transition-colors flex items-center justify-center" aria-label="Toggle Navigation Sidebar">
-            <span class="material-symbols-outlined">menu</span>
-        </button>
-        
-        <span class="text-body-md font-bold text-on-surface mr-4 tracking-wider">NASEEF</span>
-        <nav class="hidden md:flex space-x-3">
-            <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors" href="#">File</a>
-            <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors" href="#">Edit</a>
-            <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors" href="#">Selection</a>
-            <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors" href="#">View</a>
-            <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors" href="#">Go</a>
-            <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors" href="#">Run</a>
-            <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors" href="#">Terminal</a>
-            <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors" href="#">Help</a>
-        </nav>
-    </div>
-    
-    <!-- Collapsible Center Search Bar -->
-    <div class="hidden md:flex flex-grow justify-center max-w-xl mx-4">
-        <div class="bg-surface-container-high border border-outline-variant rounded px-4 py-0.5 flex items-center w-full">
-            <span class="material-symbols-outlined text-on-surface-variant mr-2" style="font-size:14px">search</span>
-            <span class="text-on-surface-variant text-label-sm font-label-sm">NASEEF - Portfolio Notebook Search</span>
+    <!-- Top AppBar -->
+    <header
+        class="flex items-center justify-between px-padding-md w-full bg-background border-b border-outline-variant fixed top-0 z-50 h-11">
+        <div class="flex items-center space-x-2">
+            <!-- Mobile Sidebar Toggle -->
+            <button id="btn-toggle-sidebar"
+                class="md:hidden text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-variant/50 transition-colors flex items-center justify-center"
+                aria-label="Toggle Navigation Sidebar">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+
+            <span class="text-body-md font-bold text-on-surface mr-4 tracking-wider">NASEEF</span>
+            <nav class="hidden md:flex space-x-3">
+                <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors"
+                    href="#">File</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors"
+                    href="#">Edit</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors"
+                    href="#">Selection</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors"
+                    href="#">View</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors"
+                    href="#">Go</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors"
+                    href="#">Run</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors"
+                    href="#">Terminal</a>
+                <a class="text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm transition-colors"
+                    href="#">Help</a>
+            </nav>
         </div>
-    </div>
-    
-    <div class="flex items-center space-x-2 text-on-surface-variant">
-        <button class="flex items-center bg-primary-container text-on-primary-container hover:bg-primary-container/80 px-2 py-1 rounded text-label-sm font-label-sm transition-all animate-ai-nudge mr-2 group" id="btn-ask-ai">
-            <span class="material-symbols-outlined mr-1 group-hover:scale-110 transition-transform" style="font-size:14px">auto_awesome</span>
-            <span class="hidden sm:inline">Ask AI</span>
-            <span class="sm:hidden">AI</span>
-        </button>
-        <span class="hidden sm:inline material-symbols-outlined cursor-pointer hover:text-on-surface p-1 rounded hover:bg-surface-variant/30">splitscreen</span>
-        <span class="hidden sm:inline material-symbols-outlined cursor-pointer hover:text-on-surface p-1 rounded hover:bg-surface-variant/30">open_in_new</span>
-        <span class="material-symbols-outlined cursor-pointer hover:text-on-surface p-1 rounded hover:bg-surface-variant/30">more_vert</span>
-    </div>
-</header>
 
-<!-- Backdrop overlay for mobile sidebar drawer -->
-<div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden transition-opacity duration-300 opacity-0" aria-hidden="true"></div>
-
-<!-- Workspace container -->
-<div class="flex h-screen pb-6 pt-11">
-    
-    <!-- Combined Collapsible Left Navigation Drawer -->
-    <div id="sidebar-drawer" class="fixed md:relative inset-y-0 left-0 z-40 flex -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out bg-surface-container-lowest h-screen md:h-auto pt-11 pb-6 md:pt-0 md:pb-0 shrink-0">
-        
-        <!-- Activity Bar -->
-        <aside class="w-[48px] bg-surface-container-lowest flex flex-col items-center py-2 space-y-4 border-r border-outline-variant shrink-0">
-            <div class="activity-item p-2 activity-item-active text-on-surface cursor-pointer rounded" id="activity-explorer" title="Explorer">
-                <span class="material-symbols-outlined">description</span>
-            </div>
-            <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded" title="Search">
-                <span class="material-symbols-outlined">search</span>
-            </div>
-            <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded" title="Source Control">
-                <span class="material-symbols-outlined">account_tree</span>
-            </div>
-            <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded" title="Run and Debug">
-                <span class="material-symbols-outlined">play_arrow</span>
-            </div>
-            <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded" title="Extensions">
-                <span class="material-symbols-outlined">extension</span>
-            </div>
-            <div class="flex-grow"></div>
-            <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded" title="Account">
-                <span class="material-symbols-outlined">account_circle</span>
-            </div>
-            <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded" title="Settings">
-                <span class="material-symbols-outlined">settings</span>
-            </div>
-        </aside>
-
-        <!-- Sidebar Panel Container -->
-        <aside class="w-sidebar-width bg-surface-container-low flex flex-col border-r border-outline-variant shrink-0" id="sidebar-panel">
-            
-            <!-- File Explorer View -->
-            <div class="flex flex-col h-full" id="view-explorer">
-                <div class="flex items-center justify-between px-4 py-2 border-b border-outline-variant/30">
-                    <span class="text-label-sm font-label-sm font-bold tracking-wider text-on-surface-variant uppercase">Explorer</span>
-                    <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px">more_horiz</span>
-                </div>
-                
-                <div class="flex-grow overflow-y-auto">
-                    <div class="flex items-center px-2 py-1.5 bg-surface-container-highest/50 cursor-pointer">
-                        <span class="material-symbols-outlined transition-transform duration-100 rotate-90 text-on-surface-variant" style="font-size:16px">chevron_right</span>
-                        <span class="text-label-sm font-label-sm font-bold ml-1 text-on-surface">NASEEF</span>
-                    </div>
-                    
-                    <div class="ml-3 border-l border-outline-variant/30">
-                        <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group tab-active bg-surface-container-highest border-l-2 border-primary" data-section="about-section">
-                            <span class="material-symbols-outlined text-primary mr-2" style="font-size:16px">description</span>
-                            <span class="text-body-md font-body-md text-on-surface">about.ipynb</span>
-                        </div>
-                        <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group" data-section="skills-section">
-                            <span class="material-symbols-outlined text-on-surface-variant mr-2 group-hover:text-primary transition-colors" style="font-size:16px">description</span>
-                            <span class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">technical_arsenal.ipynb</span>
-                        </div>
-                        <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group" data-section="experience-section">
-                            <span class="material-symbols-outlined text-on-surface-variant mr-2 group-hover:text-primary transition-colors" style="font-size:16px">description</span>
-                            <span class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">experience.ipynb</span>
-                        </div>
-                        <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group" data-section="projects-section">
-                            <span class="material-symbols-outlined text-on-surface-variant mr-2 group-hover:text-primary transition-colors" style="font-size:16px">description</span>
-                            <span class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">projects.ipynb</span>
-                        </div>
-                        <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group" data-section="contact-section">
-                            <span class="material-symbols-outlined text-on-surface-variant mr-2 group-hover:text-primary transition-colors" style="font-size:16px">description</span>
-                            <span class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">contact.ipynb</span>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4 border-t border-outline-variant/30">
-                        <div class="flex items-center px-2 py-1.5 cursor-pointer hover:bg-surface-variant/20">
-                            <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px">chevron_right</span>
-                            <span class="text-label-sm font-label-sm font-bold ml-1 uppercase text-on-surface-variant">Outline</span>
-                        </div>
-                        <div class="flex items-center px-2 py-1.5 cursor-pointer hover:bg-surface-variant/20">
-                            <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px">chevron_right</span>
-                            <span class="text-label-sm font-label-sm font-bold ml-1 uppercase text-on-surface-variant">Timeline</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- AI Chat View -->
-            <div class="hidden flex flex-col h-full bg-surface-container-low" id="view-ai-chat">
-                <div class="flex items-center justify-between px-4 py-2 border-b border-outline-variant/50">
-                    <span class="text-label-sm font-label-sm font-bold tracking-wider text-on-surface-variant uppercase flex items-center">
-                        <span class="material-symbols-outlined text-primary mr-1" style="font-size:14px">auto_awesome</span> STITCH AI
-                    </span>
-                    <span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-0.5 rounded hover:bg-surface-variant" id="close-ai-chat" style="font-size:16px">close</span>
-                </div>
-                
-                <!-- Chat Messages Scroll Container -->
-                <div class="flex-grow overflow-y-auto p-4 space-y-4 scrollbar-hide" id="chat-messages-container">
-                    <div class="flex items-start space-x-3">
-                        <div class="w-6 h-6 rounded bg-primary flex items-center justify-center shrink-0">
-                            <span class="material-symbols-outlined text-on-primary text-[14px]">auto_awesome</span>
-                        </div>
-                        <div class="bg-surface-container-high rounded-lg p-3 text-body-md text-on-surface leading-relaxed border border-outline-variant/30 max-w-[85%]">
-                            Hello! I am Naseef's AI assistant. Ask me anything about ML projects, experience, or skills.
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-2 mt-4">
-                        <p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider opacity-60">Quick Suggestions</p>
-                        <div class="flex flex-wrap gap-2">
-                            <button class="suggestion-btn text-left px-3 py-1.5 bg-surface-container-highest hover:bg-surface-variant border border-outline-variant/40 rounded-lg text-label-sm font-label-sm text-on-surface transition-colors">Tell me about the NASA project</button>
-                            <button class="suggestion-btn text-left px-3 py-1.5 bg-surface-container-highest hover:bg-surface-variant border border-outline-variant/40 rounded-lg text-label-sm font-label-sm text-on-surface transition-colors">What ML frameworks do you use?</button>
-                            <button class="suggestion-btn text-left px-3 py-1.5 bg-surface-container-highest hover:bg-surface-variant border border-outline-variant/40 rounded-lg text-label-sm font-label-sm text-on-surface transition-colors">Show Education details</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Chat Input Section -->
-                <div class="p-3 border-t border-outline-variant bg-surface-container-low">
-                    <div class="relative flex items-end bg-surface-container-highest border border-outline-variant rounded p-2 focus-within:border-primary transition-colors">
-                        <textarea id="chat-input" class="w-full bg-transparent border-none text-body-md text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:ring-0 resize-none h-14" placeholder="Ask about Naseef..."></textarea>
-                        <button id="chat-send" class="text-on-surface-variant hover:text-primary transition-colors p-1" aria-label="Send Message">
-                            <span class="material-symbols-outlined">send</span>
-                        </button>
-                    </div>
-                    <p class="text-[9px] text-on-surface-variant mt-1.5 text-center opacity-60">RAG chatbot answering from resume portfolio context</p>
-                </div>
-            </div>
-        </aside>
-    </div>
-
-    <!-- Main Workspace -->
-    <main class="flex-grow flex flex-col bg-background relative overflow-hidden">
-        
-        <!-- Tabs Bar (Horizontal scrolling) -->
-        <div class="flex h-9 bg-surface-container-lowest border-b border-outline-variant overflow-x-auto scrollbar-hide shrink-0" id="editor-tabs-container">
-            <div class="editor-tab-trigger tab-active flex items-center bg-background border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between group select-none shrink-0" data-section="about-section">
-                <div class="flex items-center">
-                    <span class="material-symbols-outlined text-primary mr-2" style="font-size:14px">description</span>
-                    <span class="text-tab-title font-tab-title text-on-surface">about.ipynb</span>
-                </div>
-                <span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all" style="font-size:14px">close</span>
-            </div>
-            
-            <div class="editor-tab-trigger flex items-center bg-surface-container-low border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between hover:bg-surface-container-high transition-colors group select-none shrink-0" data-section="skills-section">
-                <div class="flex items-center">
-                    <span class="material-symbols-outlined text-on-surface-variant mr-2" style="font-size:14px">description</span>
-                    <span class="text-tab-title font-tab-title text-on-surface-variant">technical_arsenal.ipynb</span>
-                </div>
-                <span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all" style="font-size:14px">close</span>
-            </div>
-
-            <div class="editor-tab-trigger flex items-center bg-surface-container-low border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between hover:bg-surface-container-high transition-colors group select-none shrink-0" data-section="experience-section">
-                <div class="flex items-center">
-                    <span class="material-symbols-outlined text-on-surface-variant mr-2" style="font-size:14px">description</span>
-                    <span class="text-tab-title font-tab-title text-on-surface-variant">experience.ipynb</span>
-                </div>
-                <span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all" style="font-size:14px">close</span>
-            </div>
-            
-            <div class="editor-tab-trigger flex items-center bg-surface-container-low border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between hover:bg-surface-container-high transition-colors group select-none shrink-0" data-section="projects-section">
-                <div class="flex items-center">
-                    <span class="material-symbols-outlined text-on-surface-variant mr-2" style="font-size:14px">description</span>
-                    <span class="text-tab-title font-tab-title text-on-surface-variant">projects.ipynb</span>
-                </div>
-                <span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all" style="font-size:14px">close</span>
-            </div>
-            
-            <div class="editor-tab-trigger flex items-center bg-surface-container-low border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between hover:bg-surface-container-high transition-colors group select-none shrink-0" data-section="contact-section">
-                <div class="flex items-center">
-                    <span class="material-symbols-outlined text-on-surface-variant mr-2" style="font-size:14px">description</span>
-                    <span class="text-tab-title font-tab-title text-on-surface-variant">contact.ipynb</span>
-                </div>
-                <span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all" style="font-size:14px">close</span>
+        <!-- Collapsible Center Search Bar -->
+        <div class="hidden md:flex flex-grow justify-center max-w-xl mx-4">
+            <div
+                class="bg-surface-container-high border border-outline-variant rounded px-4 py-0.5 flex items-center w-full">
+                <span class="material-symbols-outlined text-on-surface-variant mr-2"
+                    style="font-size:14px">search</span>
+                <span class="text-on-surface-variant text-label-sm font-label-sm">NASEEF - Portfolio Notebook
+                    Search</span>
             </div>
         </div>
-        
-        <!-- Jupyter Notebook Toolbar (Horizontal scrolling container for mobile overflow) -->
-        <div class="flex items-center justify-between px-padding-md h-9 border-b border-outline-variant bg-background overflow-x-auto scrollbar-hide shrink-0 whitespace-nowrap">
-            <div class="flex items-center space-x-3">
-                <button class="flex items-center text-label-sm font-label-sm text-on-surface hover:bg-surface-container-highest px-2 py-0.5 rounded transition-colors shrink-0">
-                    <span class="material-symbols-outlined mr-1" style="font-size:16px">add</span> Code
-                </button>
-                <button class="flex items-center text-label-sm font-label-sm text-on-surface hover:bg-surface-container-highest px-2 py-0.5 rounded transition-colors shrink-0">
-                    <span class="material-symbols-outlined mr-1" style="font-size:16px">add</span> Markdown
-                </button>
-                <div class="h-4 w-[1px] bg-outline-variant shrink-0"></div>
-                <button class="flex items-center text-label-sm font-label-sm text-on-surface hover:bg-surface-container-highest px-2 py-0.5 rounded transition-colors shrink-0">
-                    <span class="material-symbols-outlined mr-1" style="font-size:16px">play_circle</span> Run All
-                </button>
-            </div>
-            
-            <div class="flex items-center space-x-2 shrink-0 ml-4">
-                <div class="bg-surface-container-high border border-outline-variant rounded px-2 py-0.5 flex items-center cursor-pointer hover:border-primary transition-colors select-none">
-                    <span class="text-label-sm font-label-sm text-on-surface mr-1">Python 3.11 (Kernel)</span>
-                    <span class="material-symbols-outlined" style="font-size:14px">expand_more</span>
+
+        <div class="flex items-center space-x-2 text-on-surface-variant">
+            <button
+                class="flex items-center bg-primary-container text-on-primary-container hover:bg-primary-container/80 px-2 py-1 rounded text-label-sm font-label-sm transition-all animate-ai-nudge mr-2 group"
+                id="btn-ask-ai">
+                <span class="material-symbols-outlined mr-1 group-hover:scale-110 transition-transform"
+                    style="font-size:14px">auto_awesome</span>
+                <span class="hidden sm:inline">Ask AI</span>
+                <span class="sm:hidden">AI</span>
+            </button>
+            <span
+                class="hidden sm:inline material-symbols-outlined cursor-pointer hover:text-on-surface p-1 rounded hover:bg-surface-variant/30">splitscreen</span>
+            <span
+                class="hidden sm:inline material-symbols-outlined cursor-pointer hover:text-on-surface p-1 rounded hover:bg-surface-variant/30">open_in_new</span>
+            <span
+                class="material-symbols-outlined cursor-pointer hover:text-on-surface p-1 rounded hover:bg-surface-variant/30">more_vert</span>
+        </div>
+    </header>
+
+    <!-- Backdrop overlay for mobile sidebar drawer -->
+    <div id="sidebar-backdrop"
+        class="fixed inset-0 bg-black/50 z-30 hidden md:hidden transition-opacity duration-300 opacity-0"
+        aria-hidden="true"></div>
+
+    <!-- Workspace container -->
+    <div class="flex fixed top-11 bottom-6 left-0 right-0 overflow-hidden">
+
+        <!-- Combined Collapsible Left Navigation Drawer -->
+        <div id="sidebar-drawer"
+            class="fixed md:relative top-11 bottom-6 md:top-0 md:bottom-0 left-0 z-40 flex -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out bg-surface-container-lowest h-auto md:h-full shrink-0">
+
+            <!-- Activity Bar -->
+            <aside
+                class="w-[48px] bg-surface-container-lowest flex flex-col items-center py-2 space-y-4 border-r border-outline-variant shrink-0">
+                <div class="activity-item p-2 activity-item-active text-on-surface cursor-pointer rounded"
+                    id="activity-explorer" title="Explorer">
+                    <span class="material-symbols-outlined">description</span>
                 </div>
+                <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded"
+                    title="Search">
+                    <span class="material-symbols-outlined">search</span>
+                </div>
+                <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded"
+                    title="Source Control">
+                    <span class="material-symbols-outlined">account_tree</span>
+                </div>
+                <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded"
+                    title="Run and Debug">
+                    <span class="material-symbols-outlined">play_arrow</span>
+                </div>
+                <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded"
+                    title="Extensions">
+                    <span class="material-symbols-outlined">extension</span>
+                </div>
+                <div class="flex-grow"></div>
+                <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded"
+                    title="Account">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </div>
+                <div class="activity-item p-2 text-on-surface-variant hover:text-on-surface cursor-pointer rounded"
+                    title="Settings">
+                    <span class="material-symbols-outlined">settings</span>
+                </div>
+            </aside>
+
+            <!-- Sidebar Panel Container -->
+            <aside
+                class="w-sidebar-width bg-surface-container-low flex flex-col border-r border-outline-variant shrink-0"
+                id="sidebar-panel">
+
+                <!-- File Explorer View -->
+                <div class="flex flex-col h-full" id="view-explorer">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-outline-variant/30">
+                        <span
+                            class="text-label-sm font-label-sm font-bold tracking-wider text-on-surface-variant uppercase">Explorer</span>
+                        <span class="material-symbols-outlined text-on-surface-variant"
+                            style="font-size:16px">more_horiz</span>
+                    </div>
+
+                    <div class="flex-grow overflow-y-auto">
+                        <div class="flex items-center px-2 py-1.5 bg-surface-container-highest/50 cursor-pointer">
+                            <span
+                                class="material-symbols-outlined transition-transform duration-100 rotate-90 text-on-surface-variant"
+                                style="font-size:16px">chevron_right</span>
+                            <span class="text-label-sm font-label-sm font-bold ml-1 text-on-surface">NASEEF</span>
+                        </div>
+
+                        <div class="ml-3 border-l border-outline-variant/30">
+                            <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group tab-active bg-surface-container-highest border-l-2 border-primary"
+                                data-section="about-section">
+                                <span class="material-symbols-outlined text-primary mr-2"
+                                    style="font-size:16px">description</span>
+                                <span class="text-body-md font-body-md text-on-surface">about.ipynb</span>
+                            </div>
+                            <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group"
+                                data-section="skills-section">
+                                <span
+                                    class="material-symbols-outlined text-on-surface-variant mr-2 group-hover:text-primary transition-colors"
+                                    style="font-size:16px">description</span>
+                                <span
+                                    class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">technical_arsenal.ipynb</span>
+                            </div>
+                            <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group"
+                                data-section="experience-section">
+                                <span
+                                    class="material-symbols-outlined text-on-surface-variant mr-2 group-hover:text-primary transition-colors"
+                                    style="font-size:16px">description</span>
+                                <span
+                                    class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">experience.ipynb</span>
+                            </div>
+                            <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group"
+                                data-section="projects-section">
+                                <span
+                                    class="material-symbols-outlined text-on-surface-variant mr-2 group-hover:text-primary transition-colors"
+                                    style="font-size:16px">description</span>
+                                <span
+                                    class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">projects.ipynb</span>
+                            </div>
+                            <div class="editor-tab-trigger flex items-center px-4 py-1.5 hover:bg-surface-variant cursor-pointer group"
+                                data-section="contact-section">
+                                <span
+                                    class="material-symbols-outlined text-on-surface-variant mr-2 group-hover:text-primary transition-colors"
+                                    style="font-size:16px">description</span>
+                                <span
+                                    class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">contact.ipynb</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 border-t border-outline-variant/30">
+                            <div class="flex items-center px-2 py-1.5 cursor-pointer hover:bg-surface-variant/20">
+                                <span class="material-symbols-outlined text-on-surface-variant"
+                                    style="font-size:16px">chevron_right</span>
+                                <span
+                                    class="text-label-sm font-label-sm font-bold ml-1 uppercase text-on-surface-variant">Outline</span>
+                            </div>
+                            <div class="flex items-center px-2 py-1.5 cursor-pointer hover:bg-surface-variant/20">
+                                <span class="material-symbols-outlined text-on-surface-variant"
+                                    style="font-size:16px">chevron_right</span>
+                                <span
+                                    class="text-label-sm font-label-sm font-bold ml-1 uppercase text-on-surface-variant">Timeline</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Chat View -->
+                <div class="hidden flex flex-col h-full bg-surface-container-low" id="view-ai-chat">
+                    <div class="flex items-center justify-between px-4 py-2 border-b border-outline-variant/50">
+                        <span
+                            class="text-label-sm font-label-sm font-bold tracking-wider text-on-surface-variant flex items-center">
+                            <span class="material-symbols-outlined text-primary mr-1"
+                                style="font-size:14px">auto_awesome</span> naseef.ai
+                        </span>
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant cursor-pointer p-0.5 rounded hover:bg-surface-variant"
+                            id="close-ai-chat" style="font-size:16px">close</span>
+                    </div>
+
+                    <!-- Chat Messages Scroll Container -->
+                    <div class="flex-grow overflow-y-auto p-4 space-y-4 scrollbar-hide" id="chat-messages-container">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 rounded bg-primary flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-on-primary text-[14px]">auto_awesome</span>
+                            </div>
+                            <div
+                                class="bg-surface-container-high rounded-lg p-3 text-body-md text-on-surface leading-relaxed border border-outline-variant/30 max-w-[85%]">
+                                Hello! I am Naseef's AI assistant. Ask me anything about ML projects, experience, or
+                                skills.
+                            </div>
+                        </div>
+
+                        <div class="space-y-2 mt-4">
+                            <p
+                                class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider opacity-60">
+                                Quick Suggestions</p>
+                            <div class="flex flex-wrap gap-2">
+                                <button
+                                    class="suggestion-btn text-left px-3 py-1.5 bg-surface-container-highest hover:bg-surface-variant border border-outline-variant/40 rounded-lg text-label-sm font-label-sm text-on-surface transition-colors">Tell
+                                    me about the NASA project</button>
+                                <button
+                                    class="suggestion-btn text-left px-3 py-1.5 bg-surface-container-highest hover:bg-surface-variant border border-outline-variant/40 rounded-lg text-label-sm font-label-sm text-on-surface transition-colors">What
+                                    ML frameworks do you use?</button>
+                                <button
+                                    class="suggestion-btn text-left px-3 py-1.5 bg-surface-container-highest hover:bg-surface-variant border border-outline-variant/40 rounded-lg text-label-sm font-label-sm text-on-surface transition-colors">Show
+                                    Education details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input Section -->
+                    <div class="p-3 border-t border-outline-variant bg-surface-container-low">
+                        <div
+                            class="relative flex items-end bg-surface-container-highest border border-outline-variant rounded p-2 focus-within:border-primary transition-colors">
+                            <textarea id="chat-input"
+                                class="w-full bg-transparent border-none text-body-md text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:ring-0 resize-none h-14"
+                                placeholder="Ask about Naseef..."></textarea>
+                            <button id="chat-send"
+                                class="text-on-surface-variant hover:text-primary transition-colors p-1"
+                                aria-label="Send Message">
+                                <span class="material-symbols-outlined">send</span>
+                            </button>
+                        </div>
+                        <p class="text-[9px] text-on-surface-variant mt-1.5 text-center opacity-60">RAG chatbot
+                            answering from resume portfolio context</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Main Workspace -->
+        <main class="flex-grow flex flex-col bg-background relative overflow-hidden">
+
+            <!-- Tabs Bar (Horizontal scrolling) -->
+            <div class="flex h-9 bg-surface-container-lowest border-b border-outline-variant overflow-x-auto scrollbar-hide shrink-0"
+                id="editor-tabs-container">
+                <div class="editor-tab-trigger tab-active flex items-center bg-background border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between group select-none shrink-0"
+                    data-section="about-section">
+                    <div class="flex items-center">
+                        <span class="material-symbols-outlined text-primary mr-2"
+                            style="font-size:14px">description</span>
+                        <span class="text-tab-title font-tab-title text-on-surface">about.ipynb</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all"
+                        style="font-size:14px">close</span>
+                </div>
+
+                <div class="editor-tab-trigger flex items-center bg-surface-container-low border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between hover:bg-surface-container-high transition-colors group select-none shrink-0"
+                    data-section="skills-section">
+                    <div class="flex items-center">
+                        <span class="material-symbols-outlined text-on-surface-variant mr-2"
+                            style="font-size:14px">description</span>
+                        <span
+                            class="text-tab-title font-tab-title text-on-surface-variant">technical_arsenal.ipynb</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all"
+                        style="font-size:14px">close</span>
+                </div>
+
+                <div class="editor-tab-trigger flex items-center bg-surface-container-low border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between hover:bg-surface-container-high transition-colors group select-none shrink-0"
+                    data-section="experience-section">
+                    <div class="flex items-center">
+                        <span class="material-symbols-outlined text-on-surface-variant mr-2"
+                            style="font-size:14px">description</span>
+                        <span class="text-tab-title font-tab-title text-on-surface-variant">experience.ipynb</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all"
+                        style="font-size:14px">close</span>
+                </div>
+
+                <div class="editor-tab-trigger flex items-center bg-surface-container-low border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between hover:bg-surface-container-high transition-colors group select-none shrink-0"
+                    data-section="projects-section">
+                    <div class="flex items-center">
+                        <span class="material-symbols-outlined text-on-surface-variant mr-2"
+                            style="font-size:14px">description</span>
+                        <span class="text-tab-title font-tab-title text-on-surface-variant">projects.ipynb</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all"
+                        style="font-size:14px">close</span>
+                </div>
+
+                <div class="editor-tab-trigger flex items-center bg-surface-container-low border-r border-outline-variant px-3 py-1 cursor-pointer min-w-[140px] justify-between hover:bg-surface-container-high transition-colors group select-none shrink-0"
+                    data-section="contact-section">
+                    <div class="flex items-center">
+                        <span class="material-symbols-outlined text-on-surface-variant mr-2"
+                            style="font-size:14px">description</span>
+                        <span class="text-tab-title font-tab-title text-on-surface-variant">contact.ipynb</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant hover:text-on-surface p-0.5 rounded transition-all"
+                        style="font-size:14px">close</span>
+                </div>
+            </div>
+
+            <!-- Jupyter Notebook Toolbar (Horizontal scrolling container for mobile overflow) -->
+            <div
+                class="flex items-center justify-between px-padding-md h-9 border-b border-outline-variant bg-background overflow-x-auto scrollbar-hide shrink-0 whitespace-nowrap">
+                <div class="flex items-center space-x-3">
+                    <button
+                        class="flex items-center text-label-sm font-label-sm text-on-surface hover:bg-surface-container-highest px-2 py-0.5 rounded transition-colors shrink-0">
+                        <span class="material-symbols-outlined mr-1" style="font-size:16px">add</span> Code
+                    </button>
+                    <button
+                        class="flex items-center text-label-sm font-label-sm text-on-surface hover:bg-surface-container-highest px-2 py-0.5 rounded transition-colors shrink-0">
+                        <span class="material-symbols-outlined mr-1" style="font-size:16px">add</span> Markdown
+                    </button>
+                    <div class="h-4 w-[1px] bg-outline-variant shrink-0"></div>
+                    <button
+                        class="flex items-center text-label-sm font-label-sm text-on-surface hover:bg-surface-container-highest px-2 py-0.5 rounded transition-colors shrink-0">
+                        <span class="material-symbols-outlined mr-1" style="font-size:16px">play_circle</span> Run All
+                    </button>
+                </div>
+
+                <div class="flex items-center space-x-2 shrink-0 ml-4">
+                    <div
+                        class="bg-surface-container-high border border-outline-variant rounded px-2 py-0.5 flex items-center cursor-pointer hover:border-primary transition-colors select-none">
+                        <span class="text-label-sm font-label-sm text-on-surface mr-1">Python 3.11 (Kernel)</span>
+                        <span class="material-symbols-outlined" style="font-size:14px">expand_more</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notebook Content Scroll Area -->
+            <div class="flex-grow overflow-y-auto scroll-smooth px-4 sm:px-6 md:px-8 pt-4 pb-24 sm:pt-6 sm:pb-32 space-y-cell-gap bg-background"
+                id="notebook-scroll-area">
+
+                <!-- Cell 1: About Me -->
+                <section
+                    class="notebook-cell notebook-cell-active group border border-outline-variant rounded bg-surface-container-lowest p-4 sm:p-padding-md relative"
+                    id="about-section">
+                    <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Edit Cell">edit</span>
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Delete Cell">delete</span>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
+                        <!-- Headshot image responsive resizing -->
+                        <div
+                            class="w-44 h-44 sm:w-52 sm:h-52 md:w-48 md:h-48 lg:w-56 lg:h-56 shrink-0 rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container-high">
+                            <img alt="MOHAMMED NASEEF headshot" class="w-full h-full object-cover rounded-lg"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuArf5a5ipPOYjcqX_j4c8_Hplag9Jo_wjDz_-7PYB6qCWTb2k3pUS9QmjWDHtTyqRSXEG_Gl1PIhInTitpYlxCXvaznI2EP1DQ2DEEl5moSvtoJ70fhbYWa3dY6mB2IX3PP3A6-bZiciPEZSD08_CsSelGF9gbe-jAbBH_AC8kOv-Fz2WT1hRNKPTPzBxSkeOhd9YDMxHroBNJtxkRlPSRGkg7aNv9k4p0wR_acSYDZuIvhpB5OSwLeTzpCfRP4DkNhL8aBu8mnsNQ">
+                        </div>
+                        <div class="flex-grow text-center md:text-left">
+                            <div class="flex items-center justify-center md:justify-start mb-2">
+                                <span
+                                    class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[1]</span>
+                                <span
+                                    class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
+                            </div>
+                            <h1 class="font-headline-lg text-xl sm:text-2xl md:text-3xl text-primary mb-1 font-bold">
+                                MOHAMMED NASEEF</h1>
+                            <h2 class="font-headline-md text-base sm:text-lg md:text-xl text-secondary mb-4">AI / ML
+                                Engineer | Data Scientist</h2>
+                            <p
+                                class="font-body-md text-sm md:text-body-md text-on-surface-variant leading-relaxed max-w-2xl mx-auto md:mx-0">
+                                Dedicated and innovative AI/ML Engineer and Data Scientist with a deep passion for
+                                building scalable machine learning systems and generative AI solutions.
+                                Specializing in transforming complex data into actionable insights through advanced
+                                neural architectures and statistical modeling.
+                                Committed to the pursuit of efficient, high-performance computing in the realm of
+                                artificial intelligence.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cell 2: Technical Arsenal -->
+                <section
+                    class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all"
+                    id="skills-section">
+                    <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Edit Cell">edit</span>
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Delete Cell">delete</span>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[2]</span>
+                        <span
+                            class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
+                    </div>
+                    <h3 class="font-headline-md text-lg sm:text-headline-md text-on-surface mb-6 flex items-center">
+                        <span class="material-symbols-outlined mr-2 text-primary">terminal</span> Technical Arsenal
+                    </h3>
+
+                    <!-- Grid system adjusting columns automatically for screen width -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
+                        <div
+                            class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
+                            <a class="block group/link mb-3" href="#">
+                                <h4
+                                    class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
+                                    Languages <span
+                                        class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary"
+                                        style="font-size:14px">open_in_new</span>
+                                </h4>
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Python</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">C++</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">SQL</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">JavaScript</span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
+                            <a class="block group/link mb-3" href="#">
+                                <h4
+                                    class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
+                                    ML / Frameworks <span
+                                        class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary"
+                                        style="font-size:14px">open_in_new</span>
+                                </h4>
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">PyTorch</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">TensorFlow</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Scikit-learn</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Keras</span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
+                            <a class="block group/link mb-3" href="#">
+                                <h4
+                                    class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
+                                    GenAI <span
+                                        class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary"
+                                        style="font-size:14px">open_in_new</span>
+                                </h4>
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">LLMs</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">LangChain</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Transformers</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">RAG</span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
+                            <a class="block group/link mb-3" href="#">
+                                <h4
+                                    class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
+                                    Computer Vision <span
+                                        class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary"
+                                        style="font-size:14px">open_in_new</span>
+                                </h4>
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">OpenCV</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">YOLOv8</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">MediaPipe</span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
+                            <a class="block group/link mb-3" href="#">
+                                <h4
+                                    class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
+                                    Data Tools <span
+                                        class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary"
+                                        style="font-size:14px">open_in_new</span>
+                                </h4>
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Pandas</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">NumPy</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Matplotlib</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Power
+                                    BI</span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
+                            <a class="block group/link mb-3" href="#">
+                                <h4
+                                    class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
+                                    Dev Tools <span
+                                        class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary"
+                                        style="font-size:14px">open_in_new</span>
+                                </h4>
+                            </a>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Docker</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Git</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">AWS</span>
+                                <span
+                                    class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">FastAPI</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Cell 3: Experience (Code Style) -->
+                <section
+                    class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all"
+                    id="experience-section">
+                    <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Run Code">play_arrow</span>
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Cell Settings">more_vert</span>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[3]</span>
+                        <span
+                            class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Code</span>
+                    </div>
+
+                    <!-- Code box with horizontal scrolling -->
+                    <div
+                        class="bg-surface-container-low p-4 border border-outline-variant rounded font-code-block text-code-block overflow-x-auto whitespace-pre">
+                        <span class="text-secondary">class</span> <span
+                            class="text-primary">ProfessionalExperience</span>:
+                        <span class="text-secondary">def</span> <span class="text-primary">__init__</span>(self):
+                        self.role = <span class="text-on-secondary-container">"Data Science Intern"</span>
+                        self.company = <span class="text-on-secondary-container">"Catalyst Skill Hub"</span>
+                        self.duration = <span class="text-on-secondary-container">"Aug 2025 - Jun 2026"</span>
+
+                        <span class="text-secondary">def</span> <span class="text-primary">get_impact</span>(self):
+                        <span class="text-secondary">return</span> {
+                        <span class="text-on-secondary-container">"optimization"</span>: <span
+                            class="text-on-secondary-container">"Reduced model inference latency by 15% using
+                            quantization."</span>,
+                        <span class="text-on-secondary-container">"development"</span>: <span
+                            class="text-on-secondary-container">"Engineered custom RAG pipelines for documentation
+                            automation."</span>,
+                        <span class="text-on-secondary-container">"stack"</span>: [<span
+                            class="text-on-secondary-container">"Python"</span>, <span
+                            class="text-on-secondary-container">"PyTorch"</span>, <span
+                            class="text-on-secondary-container">"HuggingFace"</span>]
+                        }
+
+                        <span class="text-outline-variant"># Executing experience block...</span>
+                        print(f<span class="text-on-secondary-container">"{ProfessionalExperience().role} @
+                            {ProfessionalExperience().company}"</span>)
+                        print(ProfessionalExperience().get_impact())
+                    </div>
+                    <div
+                        class="mt-2 p-3 font-code-block text-code-block text-on-surface-variant bg-surface-container-lowest border-l-4 border-outline-variant overflow-x-auto whitespace-pre">
+                        &gt; Data Science Intern @ Catalyst Skill Hub
+                        &gt; {'optimization': 'Reduced model inference latency by 15% using quantization.',
+                        'development': 'Engineered custom RAG pipelines for documentation automation.', 'stack':
+                        ['Python', 'PyTorch', 'HuggingFace']}</div>
+                </section>
+
+                <!-- Education & Certs -->
+                <div
+                    class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all">
+                    <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Edit Cell">edit</span>
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Delete Cell">delete</span>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[4]</span>
+                        <span
+                            class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
+                    </div>
+                    <h3 class="font-headline-md text-lg sm:text-headline-md text-on-surface mb-6 flex items-center">
+                        <span class="material-symbols-outlined mr-2 text-primary">school</span> Education &amp;
+                        Certifications
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div
+                            class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-l-2 border-outline-variant pl-4 py-1 gap-2">
+                            <div>
+                                <h4 class="font-body-md font-bold text-on-surface text-sm sm:text-body-md">B.Tech in
+                                    Computer Science and Engineering</h4>
+                                <p class="text-label-sm font-label-sm text-on-surface-variant">MES College of
+                                    Engineering, Kuttippuram</p>
+                            </div>
+                            <span class="text-label-sm font-label-sm text-outline shrink-0">2021 — 2025</span>
+                        </div>
+
+                        <div
+                            class="flex items-center space-x-4 bg-surface-container-low p-3 rounded border border-outline-variant max-w-md">
+                            <span
+                                class="material-symbols-outlined text-primary text-2xl shrink-0">workspace_premium</span>
+                            <div>
+                                <h4 class="text-label-sm font-label-sm font-bold text-on-surface">Deep Learning
+                                    Specialization</h4>
+                                <p class="text-[10px] uppercase text-on-surface-variant tracking-wider">Coursera |
+                                    DeepLearning.AI</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cell 5: Featured Projects -->
+                <section
+                    class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all"
+                    id="projects-section">
+                    <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Edit Cell">edit</span>
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Delete Cell">delete</span>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[5]</span>
+                        <span
+                            class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
+                    </div>
+                    <h3 class="font-headline-md text-lg sm:text-headline-md text-on-surface mb-6 flex items-center">
+                        <span class="material-symbols-outlined mr-2 text-primary">rocket_launch</span> Featured Projects
+                    </h3>
+
+                    <div class="space-y-6">
+
+                        <div
+                            class="flex flex-col md:flex-row gap-6 p-4 rounded border border-outline-variant bg-surface-container-low hover:border-secondary transition-colors group/proj">
+                            <div
+                                class="w-full md:w-48 h-32 bg-surface-container-high rounded overflow-hidden flex items-center justify-center border border-outline-variant shrink-0 text-center">
+                                <span
+                                    class="material-symbols-outlined text-4xl text-outline-variant group-hover/proj:text-secondary transition-colors">analytics</span>
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-headline-md text-base sm:text-headline-md text-secondary mb-2 font-bold">
+                                    <a href="https://github.com/Naseefnf/predictive-maintenance" target="_blank"
+                                        class="hover:underline inline-flex items-center gap-1">
+                                        Predictive Maintenance — Industrial Engine Failure Prediction
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </h4>
+                                <p class="text-sm md:text-body-md text-on-surface-variant mb-4">Developed a Remaining
+                                    Useful Life (RUL) prediction pipeline on the NASA CMAPSS dataset using Random Forest
+                                    and XGBoost, deployed via Streamlit.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">XGBoost</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">Streamlit</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">Scikit-learn</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col md:flex-row gap-6 p-4 rounded border border-outline-variant bg-surface-container-low hover:border-secondary transition-colors group/proj">
+                            <div
+                                class="w-full md:w-48 h-32 bg-surface-container-high rounded overflow-hidden flex items-center justify-center border border-outline-variant shrink-0 text-center">
+                                <span
+                                    class="material-symbols-outlined text-4xl text-outline-variant group-hover/proj:text-secondary transition-colors">psychology</span>
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-headline-md text-base sm:text-headline-md text-secondary mb-2 font-bold">
+                                    <a href="https://github.com/Naseefnf/ai_mentor" target="_blank"
+                                        class="hover:underline inline-flex items-center gap-1">
+                                        AI Mentor
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </h4>
+                                <p class="text-sm md:text-body-md text-on-surface-variant mb-4">An intelligent learning
+                                    companion utilizing LLMs to provide personalized technical guidance and code reviews
+                                    for junior developers.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">OpenAI
+                                        API</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">FastAPI</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">React</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col md:flex-row gap-6 p-4 rounded border border-outline-variant bg-surface-container-low hover:border-secondary transition-colors group/proj">
+                            <div
+                                class="w-full md:w-48 h-32 bg-surface-container-high rounded overflow-hidden flex items-center justify-center border border-outline-variant shrink-0 text-center">
+                                <span
+                                    class="material-symbols-outlined text-4xl text-outline-variant group-hover/proj:text-secondary transition-colors">monitoring</span>
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-headline-md text-base sm:text-headline-md text-secondary mb-2 font-bold">
+                                    <a href="https://github.com/Naseefnf/machinesense" target="_blank"
+                                        class="hover:underline inline-flex items-center gap-1">
+                                        MachineSense
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </h4>
+                                <p class="text-sm md:text-body-md text-on-surface-variant mb-4">A multi-tenant SaaS
+                                    platform where factory companies train a custom AI model on their machines and
+                                    employees identify them instantly by photo.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">FastAPI</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">TensorFlow</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">ResNet50</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">React</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">Tailwind
+                                        CSS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col md:flex-row gap-6 p-4 rounded border border-outline-variant bg-surface-container-low hover:border-secondary transition-colors group/proj">
+                            <div
+                                class="w-full md:w-48 h-32 bg-surface-container-high rounded overflow-hidden flex items-center justify-center border border-outline-variant shrink-0 text-center">
+                                <span
+                                    class="material-symbols-outlined text-4xl text-outline-variant group-hover/proj:text-secondary transition-colors">delete_sweep</span>
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-headline-md text-base sm:text-headline-md text-secondary mb-2 font-bold">
+                                    <a href="https://github.com/Naseefnf/WastepyWasteSortingUsingMLandIoT"
+                                        target="_blank" class="hover:underline inline-flex items-center gap-1">
+                                        Waste Classification System
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </h4>
+                                <p class="text-sm md:text-body-md text-on-surface-variant mb-4">Computer vision
+                                    application that automates waste sorting through high-accuracy object detection and
+                                    classification models.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">YOLOv8</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">PyTorch</span>
+                                    <span
+                                        class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">Edge
+                                        AI</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <div class="h-16 md:h-24"></div> <!-- Spacer for scroll -->
+
+                <!-- Cell 6: Contact & Socials -->
+                <section
+                    class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all"
+                    id="contact-section">
+                    <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Edit Cell">edit</span>
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors"
+                            title="Delete Cell">delete</span>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[6]</span>
+                        <span
+                            class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
+                    </div>
+                    <h3 class="font-headline-md text-lg sm:text-headline-md text-on-surface mb-6 flex items-center">
+                        <span class="material-symbols-outlined mr-2 text-primary">alternate_email</span> Contact &amp;
+                        Socials
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
+                        <a class="flex items-center p-3 rounded border border-outline-variant bg-surface-container-low hover:border-primary hover:bg-surface-container-high transition-all group/social"
+                            href="https://linkedin.com/in/naseefp" target="_blank">
+                            <svg class="w-5 h-5 mr-3 text-primary fill-current" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                                </path>
+                            </svg>
+                            <div>
+                                <div class="text-label-sm font-bold text-on-surface">LinkedIn</div>
+                                <div class="text-[10px] text-on-surface-variant">linkedin.com/in/naseefp</div>
+                            </div>
+                        </a>
+
+                        <a class="flex items-center p-3 rounded border border-outline-variant bg-surface-container-low hover:border-primary hover:bg-surface-container-high transition-all group/social"
+                            href="https://github.com/Naseefnf" target="_blank">
+                            <svg class="w-5 h-5 mr-3 text-primary fill-current" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12">
+                                </path>
+                            </svg>
+                            <div>
+                                <div class="text-label-sm font-bold text-on-surface">GitHub</div>
+                                <div class="text-[10px] text-on-surface-variant">github.com/Naseefnf</div>
+                            </div>
+                        </a>
+
+                        <a class="flex items-center p-3 rounded border border-outline-variant bg-surface-container-low hover:border-primary hover:bg-surface-container-high transition-all group/social"
+                            href="mailto:mohammednaseefp@gmail.com">
+                            <svg class="w-5 h-5 mr-3 text-primary fill-current" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z">
+                                </path>
+                            </svg>
+                            <div>
+                                <div class="text-label-sm font-bold text-on-surface">Email</div>
+                                <div class="text-[10px] text-on-surface-variant">mohammednaseefp@gmail.com</div>
+                            </div>
+                        </a>
+
+                        <a class="flex items-center p-3 rounded border border-outline-variant bg-surface-container-low hover:border-primary hover:bg-surface-container-high transition-all group/social"
+                            href="https://www.instagram.com/naseefnf" target="_blank">
+                            <svg class="w-5 h-5 mr-3 text-primary fill-current" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+                                </path>
+                            </svg>
+                            <div>
+                                <div class="text-label-sm font-bold text-on-surface">Instagram</div>
+                                <div class="text-[10px] text-on-surface-variant">@naseefnf</div>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Status Bar -->
+    <footer
+        class="fixed bottom-0 left-0 w-full flex justify-between items-center px-4 h-6 bg-primary-container text-on-primary-container z-50 text-label-sm font-label-sm">
+        <div class="flex items-center space-x-4 h-full">
+            <div class="flex items-center px-2 hover:bg-white/10 h-full cursor-pointer">
+                <span class="material-symbols-outlined mr-1" style="font-size:12px">account_tree</span>
+                <span>main*</span>
+            </div>
+            <div class="flex items-center px-2 hover:bg-white/10 h-full cursor-pointer">
+                <span class="material-symbols-outlined mr-1" style="font-size:12px">sync</span>
+                <span>0 errors, 0 warnings</span>
             </div>
         </div>
-        
-        <!-- Notebook Content Scroll Area -->
-        <div class="flex-grow overflow-y-auto scroll-smooth px-4 sm:px-6 md:px-8 py-4 sm:py-6 space-y-cell-gap bg-background" id="notebook-scroll-area">
-            
-            <!-- Cell 1: About Me -->
-            <section class="notebook-cell notebook-cell-active group border border-outline-variant rounded bg-surface-container-lowest p-4 sm:p-padding-md relative" id="about-section">
-                <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Edit Cell">edit</span>
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Delete Cell">delete</span>
-                </div>
-                <div class="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
-                    <!-- Headshot image responsive resizing -->
-                    <div class="w-44 h-44 sm:w-52 sm:h-52 md:w-48 md:h-48 lg:w-56 lg:h-56 shrink-0 rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container-high">
-                        <img alt="MOHAMMED NASEEF headshot" class="w-full h-full object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArf5a5ipPOYjcqX_j4c8_Hplag9Jo_wjDz_-7PYB6qCWTb2k3pUS9QmjWDHtTyqRSXEG_Gl1PIhInTitpYlxCXvaznI2EP1DQ2DEEl5moSvtoJ70fhbYWa3dY6mB2IX3PP3A6-bZiciPEZSD08_CsSelGF9gbe-jAbBH_AC8kOv-Fz2WT1hRNKPTPzBxSkeOhd9YDMxHroBNJtxkRlPSRGkg7aNv9k4p0wR_acSYDZuIvhpB5OSwLeTzpCfRP4DkNhL8aBu8mnsNQ">
-                    </div>
-                    <div class="flex-grow text-center md:text-left">
-                        <div class="flex items-center justify-center md:justify-start mb-2">
-                            <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[1]</span>
-                            <span class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
-                        </div>
-                        <h1 class="font-headline-lg text-xl sm:text-2xl md:text-3xl text-primary mb-1 font-bold">MOHAMMED NASEEF</h1>
-                        <h2 class="font-headline-md text-base sm:text-lg md:text-xl text-secondary mb-4">AI / ML Engineer | Data Scientist</h2>
-                        <p class="font-body-md text-sm md:text-body-md text-on-surface-variant leading-relaxed max-w-2xl mx-auto md:mx-0">
-                            Dedicated and innovative AI/ML Engineer and Data Scientist with a deep passion for building scalable machine learning systems and generative AI solutions. 
-                            Specializing in transforming complex data into actionable insights through advanced neural architectures and statistical modeling. 
-                            Committed to the pursuit of efficient, high-performance computing in the realm of artificial intelligence.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Cell 2: Technical Arsenal -->
-            <section class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all" id="skills-section">
-                <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Edit Cell">edit</span>
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Delete Cell">delete</span>
-                </div>
-                <div class="flex items-center mb-4">
-                    <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[2]</span>
-                    <span class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
-                </div>
-                <h3 class="font-headline-md text-lg sm:text-headline-md text-on-surface mb-6 flex items-center">
-                    <span class="material-symbols-outlined mr-2 text-primary">terminal</span> Technical Arsenal
-                </h3>
-                
-                <!-- Grid system adjusting columns automatically for screen width -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    
-                    <div class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
-                        <a class="block group/link mb-3" href="#">
-                            <h4 class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
-                                Languages <span class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary" style="font-size:14px">open_in_new</span>
-                            </h4>
-                        </a>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Python</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">C++</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">SQL</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">JavaScript</span>
-                        </div>
-                    </div>
 
-                    <div class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
-                        <a class="block group/link mb-3" href="#">
-                            <h4 class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
-                                ML / Frameworks <span class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary" style="font-size:14px">open_in_new</span>
-                            </h4>
-                        </a>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">PyTorch</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">TensorFlow</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Scikit-learn</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Keras</span>
-                        </div>
-                    </div>
+        <div class="hidden sm:flex items-center space-x-4 h-full">
+            <div class="px-2 hover:bg-white/10 h-full cursor-default">Spaces: 4</div>
+            <div class="px-2 hover:bg-white/10 h-full cursor-default">UTF-8</div>
+            <div class="px-2 hover:bg-white/10 h-full cursor-default">Python 3.11.0</div>
+            <div class="px-2 hover:bg-white/10 h-full cursor-pointer flex items-center">
+                <span class="material-symbols-outlined mr-1" style="font-size:12px">check</span>
+                <span>Prettier</span>
+            </div>
+            <div class="flex items-center px-2 hover:bg-white/10 h-full cursor-pointer">
+                <span class="material-symbols-outlined" style="font-size:14px">notifications</span>
+            </div>
+        </div>
+    </footer>
 
-                    <div class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
-                        <a class="block group/link mb-3" href="#">
-                            <h4 class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
-                                GenAI <span class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary" style="font-size:14px">open_in_new</span>
-                            </h4>
-                        </a>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">LLMs</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">LangChain</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Transformers</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">RAG</span>
-                        </div>
-                    </div>
+    <script>
+        // Elements
+        const btnToggleSidebar = document.getElementById('btn-toggle-sidebar');
+        const sidebarDrawer = document.getElementById('sidebar-drawer');
+        const sidebarBackdrop = document.getElementById('sidebar-backdrop');
 
-                    <div class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
-                        <a class="block group/link mb-3" href="#">
-                            <h4 class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
-                                Computer Vision <span class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary" style="font-size:14px">open_in_new</span>
-                            </h4>
-                        </a>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">OpenCV</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">YOLOv8</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">MediaPipe</span>
-                        </div>
-                    </div>
+        const explorerIcon = document.getElementById('activity-explorer');
+        const askAiBtn = document.getElementById('btn-ask-ai');
+        const closeAiBtn = document.getElementById('close-ai-chat');
 
-                    <div class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
-                        <a class="block group/link mb-3" href="#">
-                            <h4 class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
-                                Data Tools <span class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary" style="font-size:14px">open_in_new</span>
-                            </h4>
-                        </a>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Pandas</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">NumPy</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Matplotlib</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Power BI</span>
-                        </div>
-                    </div>
+        const viewExplorer = document.getElementById('view-explorer');
+        const viewAiChat = document.getElementById('view-ai-chat');
+        const activityItems = document.querySelectorAll('.activity-item');
 
-                    <div class="p-4 rounded border border-outline-variant bg-surface-container-low hover:border-primary transition-colors flex flex-col">
-                        <a class="block group/link mb-3" href="#">
-                            <h4 class="text-label-sm font-label-sm text-primary uppercase tracking-widest flex items-center justify-between font-bold">
-                                Dev Tools <span class="material-symbols-outlined opacity-0 group-hover/link:opacity-100 transition-opacity text-primary" style="font-size:14px">open_in_new</span>
-                            </h4>
-                        </a>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Docker</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">Git</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">AWS</span>
-                            <span class="px-2 py-1 bg-surface-container-highest text-label-sm font-label-sm rounded border border-outline-variant text-on-surface">FastAPI</span>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-            
-            <!-- Cell 3: Experience (Code Style) -->
-            <section class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all" id="experience-section">
-                <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Run Code">play_arrow</span>
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Cell Settings">more_vert</span>
-                </div>
-                <div class="flex items-center mb-2">
-                    <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[3]</span>
-                    <span class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Code</span>
-                </div>
-                
-                <!-- Code box with horizontal scrolling -->
-                <div class="bg-surface-container-low p-4 border border-outline-variant rounded font-code-block text-code-block overflow-x-auto whitespace-pre"><span class="text-secondary">class</span> <span class="text-primary">ProfessionalExperience</span>:
-    <span class="text-secondary">def</span> <span class="text-primary">__init__</span>(self):
-        self.role = <span class="text-on-secondary-container">"Data Science Intern"</span>
-        self.company = <span class="text-on-secondary-container">"Catalyst Skill Hub"</span>
-        self.duration = <span class="text-on-secondary-container">"Aug 2025 - Jun 2026"</span>
-    
-    <span class="text-secondary">def</span> <span class="text-primary">get_impact</span>(self):
-        <span class="text-secondary">return</span> {
-            <span class="text-on-secondary-container">"optimization"</span>: <span class="text-on-secondary-container">"Reduced model inference latency by 15% using quantization."</span>,
-            <span class="text-on-secondary-container">"development"</span>: <span class="text-on-secondary-container">"Engineered custom RAG pipelines for documentation automation."</span>,
-            <span class="text-on-secondary-container">"stack"</span>: [<span class="text-on-secondary-container">"Python"</span>, <span class="text-on-secondary-container">"PyTorch"</span>, <span class="text-on-secondary-container">"HuggingFace"</span>]
+        // Toggle Sidebar Drawer (Mobile Overlay)
+        function toggleMobileSidebar(show) {
+            if (show) {
+                sidebarDrawer.classList.remove('-translate-x-full');
+                sidebarBackdrop.classList.remove('hidden');
+                setTimeout(() => {
+                    sidebarBackdrop.classList.remove('opacity-0');
+                }, 10);
+            } else {
+                sidebarDrawer.classList.add('-translate-x-full');
+                sidebarBackdrop.classList.add('opacity-0');
+                setTimeout(() => {
+                    sidebarBackdrop.classList.add('hidden');
+                }, 300);
+            }
         }
 
-<span class="text-outline-variant"># Executing experience block...</span>
-print(f<span class="text-on-secondary-container">"{ProfessionalExperience().role} @ {ProfessionalExperience().company}"</span>)
-print(ProfessionalExperience().get_impact())</div>
-                <div class="mt-2 p-3 font-code-block text-code-block text-on-surface-variant bg-surface-container-lowest border-l-4 border-outline-variant overflow-x-auto whitespace-pre">
-&gt; Data Science Intern @ Catalyst Skill Hub
-&gt; {'optimization': 'Reduced model inference latency by 15% using quantization.', 'development': 'Engineered custom RAG pipelines for documentation automation.', 'stack': ['Python', 'PyTorch', 'HuggingFace']}</div>
-            </section>
-            
-            <!-- Education & Certs -->
-            <div class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all">
-                <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Edit Cell">edit</span>
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Delete Cell">delete</span>
-                </div>
-                <div class="flex items-center mb-4">
-                    <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[4]</span>
-                    <span class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
-                </div>
-                <h3 class="font-headline-md text-lg sm:text-headline-md text-on-surface mb-6 flex items-center">
-                    <span class="material-symbols-outlined mr-2 text-primary">school</span> Education &amp; Certifications
-                </h3>
-                
-                <div class="space-y-4">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-l-2 border-outline-variant pl-4 py-1 gap-2">
-                        <div>
-                            <h4 class="font-body-md font-bold text-on-surface text-sm sm:text-body-md">B.Tech in Computer Science and Engineering</h4>
-                            <p class="text-label-sm font-label-sm text-on-surface-variant">MES College of Engineering, Kuttippuram</p>
-                        </div>
-                        <span class="text-label-sm font-label-sm text-outline shrink-0">2021 — 2025</span>
-                    </div>
-                    
-                    <div class="flex items-center space-x-4 bg-surface-container-low p-3 rounded border border-outline-variant max-w-md">
-                        <span class="material-symbols-outlined text-primary text-2xl shrink-0">workspace_premium</span>
-                        <div>
-                            <h4 class="text-label-sm font-label-sm font-bold text-on-surface">Deep Learning Specialization</h4>
-                            <p class="text-[10px] uppercase text-on-surface-variant tracking-wider">Coursera | DeepLearning.AI</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Cell 5: Featured Projects -->
-            <section class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all" id="projects-section">
-                <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Edit Cell">edit</span>
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Delete Cell">delete</span>
-                </div>
-                <div class="flex items-center mb-4">
-                    <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[5]</span>
-                    <span class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
-                </div>
-                <h3 class="font-headline-md text-lg sm:text-headline-md text-on-surface mb-6 flex items-center">
-                    <span class="material-symbols-outlined mr-2 text-primary">rocket_launch</span> Featured Projects
-                </h3>
-                
-                <div class="space-y-6">
-                    
-                    <div class="flex flex-col md:flex-row gap-6 p-4 rounded border border-outline-variant bg-surface-container-low hover:border-secondary transition-colors group/proj">
-                        <div class="w-full md:w-48 h-32 bg-surface-container-high rounded overflow-hidden flex items-center justify-center border border-outline-variant shrink-0 text-center">
-                            <span class="material-symbols-outlined text-4xl text-outline-variant group-hover/proj:text-secondary transition-colors">analytics</span>
-                        </div>
-                        <div>
-                            <h4 class="font-headline-md text-base sm:text-headline-md text-secondary mb-2 font-bold">
-                                <a href="https://github.com/Naseefnf/predictive-maintenance" target="_blank" class="hover:underline inline-flex items-center gap-1">
-                                    Predictive Maintenance — Industrial Engine Failure Prediction
-                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
-                                </a>
-                            </h4>
-                            <p class="text-sm md:text-body-md text-on-surface-variant mb-4">Developed a Remaining Useful Life (RUL) prediction pipeline on the NASA CMAPSS dataset using Random Forest and XGBoost, deployed via Streamlit.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">XGBoost</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">Streamlit</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">Scikit-learn</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col md:flex-row gap-6 p-4 rounded border border-outline-variant bg-surface-container-low hover:border-secondary transition-colors group/proj">
-                        <div class="w-full md:w-48 h-32 bg-surface-container-high rounded overflow-hidden flex items-center justify-center border border-outline-variant shrink-0 text-center">
-                            <span class="material-symbols-outlined text-4xl text-outline-variant group-hover/proj:text-secondary transition-colors">psychology</span>
-                        </div>
-                        <div>
-                            <h4 class="font-headline-md text-base sm:text-headline-md text-secondary mb-2 font-bold">
-                                <a href="https://github.com/Naseefnf/ai_mentor" target="_blank" class="hover:underline inline-flex items-center gap-1">
-                                    AI Mentor
-                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
-                                </a>
-                            </h4>
-                            <p class="text-sm md:text-body-md text-on-surface-variant mb-4">An intelligent learning companion utilizing LLMs to provide personalized technical guidance and code reviews for junior developers.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">OpenAI API</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">FastAPI</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">React</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col md:flex-row gap-6 p-4 rounded border border-outline-variant bg-surface-container-low hover:border-secondary transition-colors group/proj">
-                        <div class="w-full md:w-48 h-32 bg-surface-container-high rounded overflow-hidden flex items-center justify-center border border-outline-variant shrink-0 text-center">
-                            <span class="material-symbols-outlined text-4xl text-outline-variant group-hover/proj:text-secondary transition-colors">monitoring</span>
-                        </div>
-                        <div>
-                            <h4 class="font-headline-md text-base sm:text-headline-md text-secondary mb-2 font-bold">
-                                <a href="https://github.com/Naseefnf/machinesense" target="_blank" class="hover:underline inline-flex items-center gap-1">
-                                    MachineSense
-                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
-                                </a>
-                            </h4>
-                            <p class="text-sm md:text-body-md text-on-surface-variant mb-4">A multi-tenant SaaS platform where factory companies train a custom AI model on their machines and employees identify them instantly by photo.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">FastAPI</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">TensorFlow</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">ResNet50</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">React</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">Tailwind CSS</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col md:flex-row gap-6 p-4 rounded border border-outline-variant bg-surface-container-low hover:border-secondary transition-colors group/proj">
-                        <div class="w-full md:w-48 h-32 bg-surface-container-high rounded overflow-hidden flex items-center justify-center border border-outline-variant shrink-0 text-center">
-                            <span class="material-symbols-outlined text-4xl text-outline-variant group-hover/proj:text-secondary transition-colors">delete_sweep</span>
-                        </div>
-                        <div>
-                            <h4 class="font-headline-md text-base sm:text-headline-md text-secondary mb-2 font-bold">
-                                <a href="https://github.com/Naseefnf/WastepyWasteSortingUsingMLandIoT" target="_blank" class="hover:underline inline-flex items-center gap-1">
-                                    Waste Classification System
-                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
-                                </a>
-                            </h4>
-                            <p class="text-sm md:text-body-md text-on-surface-variant mb-4">Computer vision application that automates waste sorting through high-accuracy object detection and classification models.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">YOLOv8</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">PyTorch</span>
-                                <span class="text-label-sm font-label-sm px-2 py-0.5 bg-primary-container text-on-primary-container rounded">Edge AI</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </section>
-            
-            <div class="h-16 md:h-24"></div> <!-- Spacer for scroll -->
-            
-            <!-- Cell 6: Contact & Socials -->
-            <section class="notebook-cell group border border-transparent hover:border-outline-variant rounded bg-transparent hover:bg-surface-container-lowest p-4 sm:p-padding-md relative transition-all" id="contact-section">
-                <div class="absolute top-2 right-2 flex space-x-2 cell-hover-actions z-10">
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Edit Cell">edit</span>
-                    <span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer p-1 rounded hover:bg-surface-variant transition-colors" title="Delete Cell">delete</span>
-                </div>
-                <div class="flex items-center mb-4">
-                    <span class="text-label-sm font-label-sm text-on-surface-variant mr-4 opacity-50">[6]</span>
-                    <span class="text-label-sm font-label-sm px-1.5 py-0.5 bg-surface-container-highest text-on-surface-variant rounded">Markdown</span>
-                </div>
-                <h3 class="font-headline-md text-lg sm:text-headline-md text-on-surface mb-6 flex items-center">
-                    <span class="material-symbols-outlined mr-2 text-primary">alternate_email</span> Contact &amp; Socials
-                </h3>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
-                    <a class="flex items-center p-3 rounded border border-outline-variant bg-surface-container-low hover:border-primary hover:bg-surface-container-high transition-all group/social" href="https://linkedin.com/in/naseefp" target="_blank">
-                        <svg class="w-5 h-5 mr-3 text-primary fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
-                        <div>
-                            <div class="text-label-sm font-bold text-on-surface">LinkedIn</div>
-                            <div class="text-[10px] text-on-surface-variant">linkedin.com/in/naseefp</div>
-                        </div>
-                    </a>
-                    
-                    <a class="flex items-center p-3 rounded border border-outline-variant bg-surface-container-low hover:border-primary hover:bg-surface-container-high transition-all group/social" href="https://github.com/Naseefnf" target="_blank">
-                        <svg class="w-5 h-5 mr-3 text-primary fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-                        <div>
-                            <div class="text-label-sm font-bold text-on-surface">GitHub</div>
-                            <div class="text-[10px] text-on-surface-variant">github.com/Naseefnf</div>
-                        </div>
-                    </a>
-                    
-                    <a class="flex items-center p-3 rounded border border-outline-variant bg-surface-container-low hover:border-primary hover:bg-surface-container-high transition-all group/social" href="mailto:mohammednaseefp@gmail.com">
-                        <svg class="w-5 h-5 mr-3 text-primary fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
-                        <div>
-                            <div class="text-label-sm font-bold text-on-surface">Email</div>
-                            <div class="text-[10px] text-on-surface-variant">mohammednaseefp@gmail.com</div>
-                        </div>
-                    </a>
-                    
-                    <a class="flex items-center p-3 rounded border border-outline-variant bg-surface-container-low hover:border-primary hover:bg-surface-container-high transition-all group/social" href="https://www.instagram.com/naseefnf" target="_blank">
-                        <svg class="w-5 h-5 mr-3 text-primary fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
-                        <div>
-                            <div class="text-label-sm font-bold text-on-surface">Instagram</div>
-                            <div class="text-[10px] text-on-surface-variant">@naseefnf</div>
-                        </div>
-                    </a>
-                </div>
-            </section>
-            
-        </div>
-    </main>
-</div>
-
-<!-- Status Bar -->
-<footer class="fixed bottom-0 left-0 w-full flex justify-between items-center px-4 h-6 bg-primary-container text-on-primary-container z-50 text-label-sm font-label-sm">
-    <div class="flex items-center space-x-4 h-full">
-        <div class="flex items-center px-2 hover:bg-white/10 h-full cursor-pointer">
-            <span class="material-symbols-outlined mr-1" style="font-size:12px">account_tree</span>
-            <span>main*</span>
-        </div>
-        <div class="flex items-center px-2 hover:bg-white/10 h-full cursor-pointer">
-            <span class="material-symbols-outlined mr-1" style="font-size:12px">sync</span>
-            <span>0 errors, 0 warnings</span>
-        </div>
-    </div>
-    
-    <div class="hidden sm:flex items-center space-x-4 h-full">
-        <div class="px-2 hover:bg-white/10 h-full cursor-default">Spaces: 4</div>
-        <div class="px-2 hover:bg-white/10 h-full cursor-default">UTF-8</div>
-        <div class="px-2 hover:bg-white/10 h-full cursor-default">Python 3.11.0</div>
-        <div class="px-2 hover:bg-white/10 h-full cursor-pointer flex items-center">
-            <span class="material-symbols-outlined mr-1" style="font-size:12px">check</span>
-            <span>Prettier</span>
-        </div>
-        <div class="flex items-center px-2 hover:bg-white/10 h-full cursor-pointer">
-            <span class="material-symbols-outlined" style="font-size:14px">notifications</span>
-        </div>
-    </div>
-</footer>
-
-<script>
-    // Elements
-    const btnToggleSidebar = document.getElementById('btn-toggle-sidebar');
-    const sidebarDrawer = document.getElementById('sidebar-drawer');
-    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
-    
-    const explorerIcon = document.getElementById('activity-explorer');
-    const askAiBtn = document.getElementById('btn-ask-ai');
-    const closeAiBtn = document.getElementById('close-ai-chat');
-    
-    const viewExplorer = document.getElementById('view-explorer');
-    const viewAiChat = document.getElementById('view-ai-chat');
-    const activityItems = document.querySelectorAll('.activity-item');
-
-    // Toggle Sidebar Drawer (Mobile Overlay)
-    function toggleMobileSidebar(show) {
-        if (show) {
-            sidebarDrawer.classList.remove('-translate-x-full');
-            sidebarBackdrop.classList.remove('hidden');
-            setTimeout(() => {
-                sidebarBackdrop.classList.remove('opacity-0');
-            }, 10);
-        } else {
-            sidebarDrawer.classList.add('-translate-x-full');
-            sidebarBackdrop.classList.add('opacity-0');
-            setTimeout(() => {
-                sidebarBackdrop.classList.add('hidden');
-            }, 300);
-        }
-    }
-
-    btnToggleSidebar.addEventListener('click', () => {
-        const isOpen = !sidebarDrawer.classList.contains('-translate-x-full');
-        toggleMobileSidebar(!isOpen);
-    });
-
-    sidebarBackdrop.addEventListener('click', () => {
-        toggleMobileSidebar(false);
-    });
-
-    // View switcher (Explorer vs. AI Chat)
-    function switchView(viewId) {
-        activityItems.forEach(item => {
-            item.classList.remove('activity-item-active', 'text-on-surface');
-            item.classList.add('text-on-surface-variant');
+        btnToggleSidebar.addEventListener('click', () => {
+            const isOpen = !sidebarDrawer.classList.contains('-translate-x-full');
+            toggleMobileSidebar(!isOpen);
         });
 
-        if (viewId === 'explorer') {
-            explorerIcon.classList.add('activity-item-active');
-            explorerIcon.classList.remove('text-on-surface-variant');
-            viewExplorer.classList.remove('hidden');
-            viewAiChat.classList.add('hidden');
-        } else if (viewId === 'ai') {
-            // Highlight nothing or special active state if we had a dedicated chat icon
-            viewExplorer.classList.add('hidden');
-            viewAiChat.classList.remove('hidden');
-            
-            // Auto focus chat input
-            setTimeout(() => {
-                document.getElementById('chat-input').focus();
-            }, 100);
-        }
-
-        // On mobile, if a view is switched, keep sidebar open
-        if (window.innerWidth < 768) {
-            toggleMobileSidebar(true);
-        }
-    }
-
-    explorerIcon.addEventListener('click', () => switchView('explorer'));
-    askAiBtn.addEventListener('click', () => switchView('ai'));
-    closeAiBtn.addEventListener('click', () => {
-        if (window.innerWidth < 768) {
+        sidebarBackdrop.addEventListener('click', () => {
             toggleMobileSidebar(false);
-        } else {
-            switchView('explorer');
+        });
+
+        // View switcher (Explorer vs. AI Chat)
+        function switchView(viewId) {
+            activityItems.forEach(item => {
+                item.classList.remove('activity-item-active', 'text-on-surface');
+                item.classList.add('text-on-surface-variant');
+            });
+
+            if (viewId === 'explorer') {
+                explorerIcon.classList.add('activity-item-active');
+                explorerIcon.classList.remove('text-on-surface-variant');
+                viewExplorer.classList.remove('hidden');
+                viewAiChat.classList.add('hidden');
+            } else if (viewId === 'ai') {
+                // Highlight nothing or special active state if we had a dedicated chat icon
+                viewExplorer.classList.add('hidden');
+                viewAiChat.classList.remove('hidden');
+
+                // Auto focus chat input
+                setTimeout(() => {
+                    document.getElementById('chat-input').focus();
+                }, 100);
+            }
+
+            // On mobile, if a view is switched, keep sidebar open
+            if (window.innerWidth < 768) {
+                toggleMobileSidebar(true);
+            }
         }
-    });
 
-    // Interactive Tabs & Sections Scrolling Logic
-    const notebookArea = document.getElementById('notebook-scroll-area');
-    const tabs = document.querySelectorAll('.editor-tab-trigger');
-    const sections = document.querySelectorAll('.notebook-cell');
+        explorerIcon.addEventListener('click', () => switchView('explorer'));
+        askAiBtn.addEventListener('click', () => switchView('ai'));
+        closeAiBtn.addEventListener('click', () => {
+            if (window.innerWidth < 768) {
+                toggleMobileSidebar(false);
+            } else {
+                switchView('explorer');
+            }
+        });
 
-    let isScrollingFromTabClick = false;
-    let scrollTimeout;
+        // Interactive Tabs & Sections Scrolling Logic
+        const notebookArea = document.getElementById('notebook-scroll-area');
+        const tabs = document.querySelectorAll('.editor-tab-trigger');
+        const sections = document.querySelectorAll('.notebook-cell');
 
-    function setActiveTab(sectionId) {
-        tabs.forEach(tab => {
-            if (tab.getAttribute('data-section') === sectionId) {
-                tab.classList.add('tab-active');
-                
-                // Highlight corresponding explorer item if visible
-                if (tab.classList.contains('px-4')) { // Explorer panel lists
-                    tab.classList.add('bg-surface-container-highest', 'border-l-2', 'border-primary');
+        let isScrollingFromTabClick = false;
+        let scrollTimeout;
+
+        function setActiveTab(sectionId) {
+            tabs.forEach(tab => {
+                if (tab.getAttribute('data-section') === sectionId) {
+                    tab.classList.add('tab-active');
+
+                    // Highlight corresponding explorer item if visible
+                    if (tab.classList.contains('px-4')) { // Explorer panel lists
+                        tab.classList.add('bg-surface-container-highest', 'border-l-2', 'border-primary');
+                    } else {
+                        // Center tab in horizontal scroll
+                        tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+
+                    // Update text style
+                    const texts = tab.querySelectorAll('span');
+                    texts.forEach(t => {
+                        if (t.classList.contains('text-on-surface-variant')) {
+                            t.classList.replace('text-on-surface-variant', 'text-on-surface');
+                        }
+                    });
                 } else {
-                    // Center tab in horizontal scroll
-                    tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                }
-                
-                // Update text style
-                const texts = tab.querySelectorAll('span');
-                texts.forEach(t => {
-                    if (t.classList.contains('text-on-surface-variant')) {
-                        t.classList.replace('text-on-surface-variant', 'text-on-surface');
+                    tab.classList.remove('tab-active');
+
+                    if (tab.classList.contains('px-4')) { // Explorer panel lists
+                        tab.classList.remove('bg-surface-container-highest', 'border-l-2', 'border-primary');
                     }
-                });
-            } else {
-                tab.classList.remove('tab-active');
-                
-                if (tab.classList.contains('px-4')) { // Explorer panel lists
-                    tab.classList.remove('bg-surface-container-highest', 'border-l-2', 'border-primary');
+
+                    const texts = tab.querySelectorAll('span');
+                    texts.forEach(t => {
+                        if (t.classList.contains('text-on-surface') && !t.classList.contains('material-symbols-outlined') && t.parentElement.tagName !== 'BUTTON') {
+                            t.classList.replace('text-on-surface', 'text-on-surface-variant');
+                        }
+                    });
                 }
-                
-                const texts = tab.querySelectorAll('span');
-                texts.forEach(t => {
-                    if (t.classList.contains('text-on-surface') && !t.classList.contains('material-symbols-outlined') && t.parentElement.tagName !== 'BUTTON') {
-                         t.classList.replace('text-on-surface', 'text-on-surface-variant');
-                    }
-                });
-            }
-        });
+            });
 
-        // Set active cell outline highlight
-        sections.forEach(section => {
-            if (section.id === sectionId) {
-                section.classList.add('notebook-cell-active', 'border-outline-variant');
-                section.classList.remove('border-transparent');
-            } else {
-                section.classList.remove('notebook-cell-active', 'border-outline-variant');
-                section.classList.add('border-transparent');
-            }
-        });
-    }
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const sectionId = tab.getAttribute('data-section');
-            const targetSection = document.getElementById(sectionId);
-            
-            if (targetSection) {
-                isScrollingFromTabClick = true;
-                clearTimeout(scrollTimeout);
-                
-                // Scroll to cell container
-                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                setActiveTab(sectionId);
-                
-                // Close sidebar on mobile after clicking item
-                if (window.innerWidth < 768 && tab.classList.contains('px-4')) {
-                    toggleMobileSidebar(false);
+            // Set active cell outline highlight
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.classList.add('notebook-cell-active', 'border-outline-variant');
+                    section.classList.remove('border-transparent');
+                } else {
+                    section.classList.remove('notebook-cell-active', 'border-outline-variant');
+                    section.classList.add('border-transparent');
                 }
-                
-                // Reset scrolling lock after scroll completes
-                scrollTimeout = setTimeout(() => {
-                    isScrollingFromTabClick = false;
-                }, 800);
-            }
-        });
-    });
-
-    // Observer to update active tab on scroll
-    const observerOptions = {
-        root: notebookArea,
-        rootMargin: '-10% 0px -60% 0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        if (isScrollingFromTabClick) return; // Don't trigger observer if we specifically clicked a tab
-        
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                setActiveTab(entry.target.id);
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        if (section.id) observer.observe(section);
-    });
-
-    // Handle cell clicks for manual cell focus state
-    sections.forEach(cell => {
-        cell.addEventListener('click', () => {
-            if (cell.id) {
-                setActiveTab(cell.id);
-            }
-        });
-    });
-
-    // --- AI Chatbot RAG Logic ---
-    const chatInput = document.getElementById('chat-input');
-    const chatSend = document.getElementById('chat-send');
-    const chatMessagesContainer = document.getElementById('chat-messages-container');
-    const suggestionBtns = document.querySelectorAll('.suggestion-btn');
-
-    // Mock response database representing local PDF RAG fallback
-    const resumeRAGContext = {
-        nasa: "Mohammed Naseef's **Predictive Maintenance** project predictive failure pipelines on the NASA CMAPSS dataset. He utilized XGBoost and Random Forest classifiers to predict the Remaining Useful Life (RUL) of industrial engines, deploying the final model as an interactive Streamlit application.",
-        ml: "Naseef possesses advanced expertise in Machine Learning framework ecosystems, primarily working with **PyTorch, TensorFlow, Scikit-learn, and Keras**. He specializes in deep neural net training, optimization, and deploying models with Python and Docker.",
-        skills: "Naseef's core technical capabilities span across:\n- **Languages**: Python, C++, SQL, JS\n- **Deep Learning / Frameworks**: PyTorch, TensorFlow, Scikit-learn\n- **Generative AI**: LLMs, LangChain, Transformers, RAG pipelines\n- **Computer Vision**: OpenCV, YOLOv8, MediaPipe\n- **Data Analytics**: Pandas, NumPy, Matplotlib, Power BI, Tableau\n- **DevOps**: Docker, Git, AWS, FastAPI",
-        education: "Mohammed Naseef holds a **B.Tech in Computer Science and Engineering** from MES College of Engineering, Kuttippuram (2021 — 2025). He has also earned a **Deep Learning Specialization** certification from DeepLearning.AI via Coursera.",
-        experience: "He completed a Data Science internship at **Catalyst Skill Hub** (Aug 2025 - Jun 2026), where he reduced AI model inference latency by **15%** using quantization techniques, and built custom RAG pipelines to automate document processing.",
-        mentor: "**AI Mentor** is an intelligent assistant built by Naseef that uses OpenAI's GPT APIs and FastAPI backend to provide automated code reviews and technical guidance to developers.",
-        wastesense: "The **Waste Classification System** is an Edge AI computer vision project he developed utilizing YOLOv8 and PyTorch to classify and sort waste materials in real-time.",
-        machinesense: "**MachineSense** is a multi-tenant SaaS platform where factory companies train a custom AI model on their machines and employees identify them instantly by photo. Tech Stack: FastAPI (Backend), TensorFlow + ResNet50 (AI/ML), and React + Tailwind CSS (Frontend)."
-    };
-
-    function appendMessage(sender, text) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = "flex items-start space-x-3";
-        
-        const avatar = document.createElement('div');
-        if (sender === 'user') {
-            avatar.className = "w-6 h-6 rounded bg-secondary-container flex items-center justify-center shrink-0 text-[11px] font-bold text-on-secondary-container";
-            avatar.textContent = "ME";
-            msgDiv.className += " justify-end flex-row-reverse space-x-reverse";
-        } else {
-            avatar.className = "w-6 h-6 rounded bg-primary flex items-center justify-center shrink-0";
-            avatar.innerHTML = `<span class="material-symbols-outlined text-on-primary text-[14px]">auto_awesome</span>`;
+            });
         }
-        
-        const bubble = document.createElement('div');
-        bubble.className = `rounded-lg p-3 text-body-md text-on-surface leading-relaxed border max-w-[85%] ${
-            sender === 'user' 
-                ? 'bg-secondary-container/20 border-secondary/20' 
-                : 'bg-surface-container-high border-outline-variant/30'
-        }`;
-        
-        // Simple Markdown parser for bold text and list bullets
-        let formattedText = text
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\n- (.*?)/g, '<br>• $1')
-            .replace(/\n/g, '<br>');
-            
-        bubble.innerHTML = formattedText;
-        
-        msgDiv.appendChild(avatar);
-        msgDiv.appendChild(bubble);
-        chatMessagesContainer.appendChild(msgDiv);
-        
-        // Auto scroll to bottom
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-    }
 
-    async function handleChatMessage(messageText) {
-        if (!messageText.trim()) return;
-        
-        // Append user message
-        appendMessage('user', messageText);
-        chatInput.value = '';
-        
-        // Simulating loader
-        const loadingDiv = document.createElement('div');
-        loadingDiv.className = "flex items-start space-x-3 opacity-60 animate-pulse";
-        loadingDiv.innerHTML = `
+        tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const sectionId = tab.getAttribute('data-section');
+                const targetSection = document.getElementById(sectionId);
+
+                if (targetSection) {
+                    isScrollingFromTabClick = true;
+                    clearTimeout(scrollTimeout);
+
+                    // Scroll to cell container
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    setActiveTab(sectionId);
+
+                    // Close sidebar on mobile after clicking item
+                    if (window.innerWidth < 768 && tab.classList.contains('px-4')) {
+                        toggleMobileSidebar(false);
+                    }
+
+                    // Reset scrolling lock after scroll completes
+                    scrollTimeout = setTimeout(() => {
+                        isScrollingFromTabClick = false;
+                    }, 800);
+                }
+            });
+        });
+
+        // Observer to update active tab on scroll
+        const observerOptions = {
+            root: notebookArea,
+            rootMargin: '-10% 0px -60% 0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            if (isScrollingFromTabClick) return; // Don't trigger observer if we specifically clicked a tab
+
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveTab(entry.target.id);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            if (section.id) observer.observe(section);
+        });
+
+        // Handle cell clicks for manual cell focus state
+        sections.forEach(cell => {
+            cell.addEventListener('click', () => {
+                if (cell.id) {
+                    setActiveTab(cell.id);
+                }
+            });
+        });
+
+        // --- AI Chatbot RAG Logic ---
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatMessagesContainer = document.getElementById('chat-messages-container');
+        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+
+        // Mock response database representing local PDF RAG fallback
+        const resumeRAGContext = {
+            nasa: "Mohammed Naseef's **Predictive Maintenance** project predictive failure pipelines on the NASA CMAPSS dataset. He utilized XGBoost and Random Forest classifiers to predict the Remaining Useful Life (RUL) of industrial engines, deploying the final model as an interactive Streamlit application.",
+            ml: "Naseef possesses advanced expertise in Machine Learning framework ecosystems, primarily working with **PyTorch, TensorFlow, Scikit-learn, and Keras**. He specializes in deep neural net training, optimization, and deploying models with Python and Docker.",
+            skills: "Naseef's core technical capabilities span across:\n- **Languages**: Python, C++, SQL, JS\n- **Deep Learning / Frameworks**: PyTorch, TensorFlow, Scikit-learn\n- **Generative AI**: LLMs, LangChain, Transformers, RAG pipelines\n- **Computer Vision**: OpenCV, YOLOv8, MediaPipe\n- **Data Analytics**: Pandas, NumPy, Matplotlib, Power BI, Tableau\n- **DevOps**: Docker, Git, AWS, FastAPI",
+            education: "Mohammed Naseef holds a **B.Tech in Computer Science and Engineering** from MES College of Engineering, Kuttippuram (2021 — 2025). He has also earned a **Deep Learning Specialization** certification from DeepLearning.AI via Coursera.",
+            experience: "He completed a Data Science internship at **Catalyst Skill Hub** (Aug 2025 - Jun 2026), where he reduced AI model inference latency by **15%** using quantization techniques, and built custom RAG pipelines to automate document processing.",
+            mentor: "**AI Mentor** is an intelligent assistant built by Naseef that uses OpenAI's GPT APIs and FastAPI backend to provide automated code reviews and technical guidance to developers.",
+            wastesense: "The **Waste Classification System** is an Edge AI computer vision project he developed utilizing YOLOv8 and PyTorch to classify and sort waste materials in real-time.",
+            machinesense: "**MachineSense** is a multi-tenant SaaS platform where factory companies train a custom AI model on their machines and employees identify them instantly by photo. Tech Stack: FastAPI (Backend), TensorFlow + ResNet50 (AI/ML), and React + Tailwind CSS (Frontend)."
+        };
+
+        function appendMessage(sender, text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = "flex items-start space-x-3";
+
+            const avatar = document.createElement('div');
+            if (sender === 'user') {
+                avatar.className = "w-6 h-6 rounded bg-secondary-container flex items-center justify-center shrink-0 text-[11px] font-bold text-on-secondary-container";
+                avatar.textContent = "ME";
+                msgDiv.className += " justify-end flex-row-reverse space-x-reverse";
+            } else {
+                avatar.className = "w-6 h-6 rounded bg-primary flex items-center justify-center shrink-0";
+                avatar.innerHTML = `<span class="material-symbols-outlined text-on-primary text-[14px]">auto_awesome</span>`;
+            }
+
+            const bubble = document.createElement('div');
+            bubble.className = `rounded-lg p-3 text-body-md text-on-surface leading-relaxed border max-w-[85%] ${sender === 'user'
+                ? 'bg-secondary-container/20 border-secondary/20'
+                : 'bg-surface-container-high border-outline-variant/30'
+                }`;
+
+            // Simple Markdown parser for bold text and list bullets
+            let formattedText = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n- (.*?)/g, '<br>• $1')
+                .replace(/\n/g, '<br>');
+
+            bubble.innerHTML = formattedText;
+
+            msgDiv.appendChild(avatar);
+            msgDiv.appendChild(bubble);
+            chatMessagesContainer.appendChild(msgDiv);
+
+            // Auto scroll to bottom
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        }
+
+        async function handleChatMessage(messageText) {
+            if (!messageText.trim()) return;
+
+            // Append user message
+            appendMessage('user', messageText);
+            chatInput.value = '';
+
+            // Simulating loader
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = "flex items-start space-x-3 opacity-60 animate-pulse";
+            loadingDiv.innerHTML = `
             <div class="w-6 h-6 rounded bg-primary flex items-center justify-center shrink-0">
                 <span class="material-symbols-outlined text-on-primary text-[14px]">auto_awesome</span>
             </div>
@@ -1042,74 +1376,75 @@ print(ProfessionalExperience().get_impact())</div>
                 Thinking...
             </div>
         `;
-        chatMessagesContainer.appendChild(loadingDiv);
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+            chatMessagesContainer.appendChild(loadingDiv);
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
 
-        const cleanMsg = messageText.toLowerCase();
-        let reply = "";
+            const cleanMsg = messageText.toLowerCase();
+            let reply = "";
 
-        // First attempt to call the local FastAPI backend RAG server if running
-        try {
-            const response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: messageText })
-            });
-            if (response.ok) {
-                const data = await response.json();
-                reply = data.response;
+            // First attempt to call the local FastAPI backend RAG server if running
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: messageText })
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    reply = data.response;
+                }
+            } catch (err) {
+                // Backend server not running, use local smart RAG mock logic
+                console.log("Local backend RAG server not reachable, using offline model simulation.");
             }
-        } catch (err) {
-            // Backend server not running, use local smart RAG mock logic
-            console.log("Local backend RAG server not reachable, using offline model simulation.");
+
+            // Fallback simulation responses
+            if (!reply) {
+                await new Promise(resolve => setTimeout(resolve, 800)); // Simulate thinking latency
+
+                if (cleanMsg.includes('nasa') || cleanMsg.includes('engine') || cleanMsg.includes('predictive')) {
+                    reply = resumeRAGContext.nasa;
+                } else if (cleanMsg.includes('framework') || cleanMsg.includes('pytorch') || cleanMsg.includes('tensorflow') || cleanMsg.includes('ml skills')) {
+                    reply = resumeRAGContext.ml;
+                } else if (cleanMsg.includes('education') || cleanMsg.includes('college') || cleanMsg.includes('degree') || cleanMsg.includes('study')) {
+                    reply = resumeRAGContext.education;
+                } else if (cleanMsg.includes('experience') || cleanMsg.includes('intern') || cleanMsg.includes('catalyst') || cleanMsg.includes('work')) {
+                    reply = resumeRAGContext.experience;
+                } else if (cleanMsg.includes('mentor') || cleanMsg.includes('gpt')) {
+                    reply = resumeRAGContext.mentor;
+                } else if (cleanMsg.includes('waste') || cleanMsg.includes('yolo') || cleanMsg.includes('classification')) {
+                    reply = resumeRAGContext.wastesense;
+                } else if (cleanMsg.includes('machinesense') || cleanMsg.includes('iot') || cleanMsg.includes('sensor')) {
+                    reply = resumeRAGContext.machinesense;
+                } else if (cleanMsg.includes('skill') || cleanMsg.includes('language') || cleanMsg.includes('devops') || cleanMsg.includes('stack')) {
+                    reply = resumeRAGContext.skills;
+                } else {
+                    reply = "I've searched Naseef's indexed resume. He has experience as a **Data Science Intern** at Catalyst Skill Hub, a **B.Tech degree in CSE**, and specializes in **AI/ML systems** (PyTorch, YOLOv8, and custom RAG pipelines). Ask me details about specific projects like the **NASA Engine prediction** or **AI Mentor**!";
+                }
+            }
+
+            // Remove loading indicator & append response
+            chatMessagesContainer.removeChild(loadingDiv);
+            appendMessage('assistant', reply);
         }
 
-        // Fallback simulation responses
-        if (!reply) {
-            await new Promise(resolve => setTimeout(resolve, 800)); // Simulate thinking latency
-            
-            if (cleanMsg.includes('nasa') || cleanMsg.includes('engine') || cleanMsg.includes('predictive')) {
-                reply = resumeRAGContext.nasa;
-            } else if (cleanMsg.includes('framework') || cleanMsg.includes('pytorch') || cleanMsg.includes('tensorflow') || cleanMsg.includes('ml skills')) {
-                reply = resumeRAGContext.ml;
-            } else if (cleanMsg.includes('education') || cleanMsg.includes('college') || cleanMsg.includes('degree') || cleanMsg.includes('study')) {
-                reply = resumeRAGContext.education;
-            } else if (cleanMsg.includes('experience') || cleanMsg.includes('intern') || cleanMsg.includes('catalyst') || cleanMsg.includes('work')) {
-                reply = resumeRAGContext.experience;
-            } else if (cleanMsg.includes('mentor') || cleanMsg.includes('gpt')) {
-                reply = resumeRAGContext.mentor;
-            } else if (cleanMsg.includes('waste') || cleanMsg.includes('yolo') || cleanMsg.includes('classification')) {
-                reply = resumeRAGContext.wastesense;
-            } else if (cleanMsg.includes('machinesense') || cleanMsg.includes('iot') || cleanMsg.includes('sensor')) {
-                reply = resumeRAGContext.machinesense;
-            } else if (cleanMsg.includes('skill') || cleanMsg.includes('language') || cleanMsg.includes('devops') || cleanMsg.includes('stack')) {
-                reply = resumeRAGContext.skills;
-            } else {
-                reply = "I've searched Naseef's indexed resume. He has experience as a **Data Science Intern** at Catalyst Skill Hub, a **B.Tech degree in CSE**, and specializes in **AI/ML systems** (PyTorch, YOLOv8, and custom RAG pipelines). Ask me details about specific projects like the **NASA Engine prediction** or **AI Mentor**!";
-            }
-        }
-
-        // Remove loading indicator & append response
-        chatMessagesContainer.removeChild(loadingDiv);
-        appendMessage('assistant', reply);
-    }
-
-    chatSend.addEventListener('click', () => {
-        handleChatMessage(chatInput.value);
-    });
-
-    chatInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
+        chatSend.addEventListener('click', () => {
             handleChatMessage(chatInput.value);
-        }
-    });
-
-    suggestionBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            handleChatMessage(btn.textContent);
         });
-    });
-</script>
+
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleChatMessage(chatInput.value);
+            }
+        });
+
+        suggestionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                handleChatMessage(btn.textContent);
+            });
+        });
+    </script>
 </body>
+
 </html>
