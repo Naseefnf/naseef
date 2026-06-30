@@ -251,13 +251,13 @@
         </div>
     </header>
 
-    <!-- Backdrop overlay for mobile sidebar drawer -->
-    <div id="sidebar-backdrop"
-        class="fixed inset-0 bg-black/50 z-30 hidden md:hidden transition-opacity duration-300 opacity-0"
-        aria-hidden="true"></div>
-
     <!-- Workspace container -->
-    <div class="flex fixed top-11 bottom-6 left-0 right-0 overflow-hidden">
+    <div class="flex fixed top-11 bottom-6 left-0 right-0 overflow-hidden z-20">
+
+        <!-- Backdrop overlay for mobile sidebar drawer -->
+        <div id="sidebar-backdrop"
+            class="fixed inset-0 bg-black/50 z-30 hidden md:hidden transition-opacity duration-300 opacity-0"
+            aria-hidden="true"></div>
 
         <!-- Combined Collapsible Left Navigation Drawer -->
         <div id="sidebar-drawer"
